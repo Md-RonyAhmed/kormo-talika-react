@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskModal from './TaskModal'
+import TaskModal from '../shared/task/TaskModal'
 
 const TaskBoard = () => {
   return (

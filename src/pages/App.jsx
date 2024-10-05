@@ -1,4 +1,4 @@
-import TaskBoardLayout from "../components/shared/task/TaskBoardLayout"
+import TaskBoardLayout from "../components/task/TaskBoardLayout"
 
 const App = () => {
   return (

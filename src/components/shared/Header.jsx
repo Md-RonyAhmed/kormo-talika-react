@@ -1,5 +1,5 @@
 import logo from "../../../assets/images/assdi-logo.png";
-import SearchTask from "../task/searchTask";
+import SearchTask from "../task/SearchTask";
 export default function Header() {
   return (
     <nav className="py-4 fixed top-0 w-full z-50 dark:bg-[#262B28] bg-gray-300 shadow-md transition-colors duration-500">
