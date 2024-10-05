@@ -1,8 +1,9 @@
-import TaskBoardLayout from "../components/task/TaskBoardLayout";
-export default function App() {
+import TaskBoardLayout from "../components/shared/task/TaskBoardLayout"
+
+const App = () => {
   return (
-    <>
-      <TaskBoardLayout />
-    </>
-  );
+    <TaskBoardLayout/>
+  )
 }
+
+export default App
