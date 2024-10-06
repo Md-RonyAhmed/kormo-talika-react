@@ -9,7 +9,7 @@ export default function Header({
 }) {
   return (
     <nav className="py-4 fixed top-0 w-full z-50 bg-gray-300 dark:bg-[#262B28] shadow-md transition-colors duration-500">
-      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-12">
         {/* Logo */}
         <a href="/">
           <img
