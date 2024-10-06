@@ -46,10 +46,10 @@ export default function TaskList({ tasks, onEdit, onDelete, onFav }) {
                   <div>{task.description}</div>
                 </td>
                 <td>
-                  <ul className="flex justify-center gap-1.5 flex-wrap dark:text-white text-black">
+                  <ul className="flex justify-center gap-1.5 flex-wrap">
                     {task.tags.map((tag) => (
                       <li key={tag}>
-                        <span className="inline-block whitespace-nowrap rounded-[45px] dark:bg-green-700 bg-green-600 px-3 py-1 text-sm capitalize dark:text-white text-gray-800">
+                        <span className="inline-block whitespace-nowrap rounded-[45px] dark:bg-green-700 bg-green-600 px-3 py-1 text-sm capitalize text-white">
                           {tag}
                         </span>
                       </li>
