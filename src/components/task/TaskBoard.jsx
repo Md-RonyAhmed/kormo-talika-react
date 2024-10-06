@@ -77,7 +77,40 @@ export default function TaskBoard({ tasks, setTasks, allTasks, searchTerm }) {
   }
 
   return (
-    <section className="mt-32" id="tasks">
+    <>
+      <section className="mt-16 md:mt-20" id="tasks">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-10 text-xl sm:text-2xl md:text-3xl text-center font-semibold">
+            <h1 className="text-green-700 dark:text-white">
+              আপনার কর্ম তালিকা তৈরি করুন
+            </h1>
+          </div>
+
+          <div
+            className="rounded-lg border dark:border-[rgba(206,206,206,0.12)] border-gray-400 
+                     dark:bg-[rgba(38,43,40,0.6)] bg-gray-300 
+                     backdrop-filter backdrop-blur-lg shadow-lg 
+                     px-4 py-6 sm:px-6 md:px-8 lg:px-10 xl:px-12 
+                     md:py-10 lg:py-12"
+          >
+            {tasks.length > 0 || searchTerm ? (
+              <TaskList
+                tasks={tasks} // Display filtered tasks
+                onEdit={handleEditTask}
+                onDelete={handleDeleteTask}
+                onFav={handleFavorite}
+              />
+            ) : (
+              <NoTasksFound />
+            )}
+            <TaskActions
+              dataLength={tasks.length <= 0}
+              onAddClick={() => setShowAddModal(true)}
+              onDeleteAllClick={handleDeleteAllClick}
+            />
+          </div>
+        </div>
+      </section>
       {showAddModal && (
         <AddTaskModal
           onSave={handleAddEditTask}
@@ -85,36 +118,6 @@ export default function TaskBoard({ tasks, setTasks, allTasks, searchTerm }) {
           taskToUpdate={taskToUpdate}
         />
       )}
-      <div className="container">
-        <div class="mb-10 text-3xl text-center font-semibold">
-          <h1 className="text-green-700 dark:text-white">
-            আপনার কর্ম তালিকা তৈরি করুন
-          </h1>
-        </div>
-
-        <div
-          className="rounded-xl border-2 dark:border-[rgba(206,206,206,0.12)] border-gray-400 
-                        dark:bg-[rgba(38,43,40,0.6)] bg-gray-300
-                        backdrop-filter backdrop-blur-lg shadow-xl 
-                        px-6 py-10 md:px-9"
-        >
-          {tasks.length > 0 || searchTerm ? (
-            <TaskList
-              tasks={tasks} // Display filtered tasks
-              onEdit={handleEditTask}
-              onDelete={handleDeleteTask}
-              onFav={handleFavorite}
-            />
-          ) : (
-            <NoTasksFound />
-          )}
-          <TaskActions
-            dataLength={tasks.length <= 0}
-            onAddClick={() => setShowAddModal(true)}
-            onDeleteAllClick={handleDeleteAllClick}
-          />
-        </div>
-      </div>
-    </section>
+    </>
   );
 }

@@ -43,10 +43,8 @@ export default function AddTaskModal({ onSave, taskToUpdate, onCloseClick }) {
     }
     if (!task.tags.length) {
       newErrors.tags = "At least one tag is required";
-    } else {
-      if (task.tags.length > 3) {
-        newErrors.tags = "Maximum 3 tags are allowed";
-      }
+    } else if (task.tags.length > 3) {
+      newErrors.tags = "Maximum 3 tags are allowed";
     }
     return newErrors;
   };
@@ -67,100 +65,105 @@ export default function AddTaskModal({ onSave, taskToUpdate, onCloseClick }) {
 
   return (
     <>
+      {/* Modal */}
       <div
-        className="bg-black bg-opacity-85 h-full w-full z-50 absolute top-0 left-0"
+        className="fixed inset-0 w-full min-h-screen bg-black bg-opacity-85 z-[100] flex items-center justify-center"
         onClick={onCloseClick}
-      ></div>
-      <form
-        className="mx-auto w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] dark:bg-[#262B28] bg-gray-700 p-9 z-50 absolute left-1/3"
-        onSubmit={handleSubmit}
       >
-        <h2 className="mb-9 text-center text-2xl font-bold text-white lg:mb-11">
-          {isAdd
-            ? "আপনার কর্ম তালিকা তৈরি করুন"
-            : "আপনার কর্ম তালিকা সংশোধন করুন"}
-        </h2>
+        <form
+          className="z-50 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-gray-700 dark:bg-[#262B28] border border-gray-200 dark:border-gray-600 rounded-lg p-8 space-y-6 overflow-auto max-h-full"
+          onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
+          onSubmit={handleSubmit}
+        >
+          <h2 className="text-center text-2xl font-bold text-white">
+            {isAdd
+              ? "আপনার কর্ম তালিকা তৈরি করুন"
+              : "আপনার কর্ম তালিকা সংশোধন করুন"}
+          </h2>
 
-        <div className="space-y-6 text-white">
-          <div className="space-y-2 lg:space-y-3">
-            <label htmlFor="title">Title</label>
-            <input
-              className="block w-full rounded-md dark:bg-[#121A16] dark:text-white text-gray-700 bg-gray-200 px-3 py-2.5"
-              type="text"
-              name="title"
-              id="title"
-              value={task.title}
-              onChange={handleChange}
-            />
-            {errors.title && <p className="text-red-500">{errors.title}</p>}
-          </div>
-
-          <div className="space-y-2 lg:space-y-3">
-            <label htmlFor="description">Description</label>
-            <textarea
-              className="block min-h-[120px] w-full rounded-md dark:bg-[#121A16] dark:text-white text-gray-700 px-3 py-2.5 lg:min-h-[180px] bg-gray-200"
-              type="text"
-              name="description"
-              id="description"
-              value={task.description}
-              onChange={handleChange}
-            ></textarea>
-            {errors.description && (
-              <p className="text-red-500">{errors.description}</p>
-            )}
-          </div>
-
-          <div className="grid-cols-2 gap-x-4 max-md:space-y-9 md:grid lg:gap-x-10 xl:gap-x-20">
+          {/* Form Fields */}
+          <div className="space-y-6 text-white">
             <div className="space-y-2 lg:space-y-3">
-              <label htmlFor="tags">Tags</label>
+              <label htmlFor="title">Title</label>
               <input
                 className="block w-full rounded-md dark:bg-[#121A16] dark:text-white text-gray-700 bg-gray-200 px-3 py-2.5"
                 type="text"
-                name="tags"
-                id="tags"
-                value={task.tags.join(",")}
+                name="title"
+                id="title"
+                value={task.title}
                 onChange={handleChange}
               />
-              {errors.tags && <p className="text-red-500">{errors.tags}</p>}
+              {errors.title && <p className="text-red-500">{errors.title}</p>}
             </div>
 
             <div className="space-y-2 lg:space-y-3">
-              <label htmlFor="priority">Priority</label>
-              <select
-                className="block w-full cursor-pointer rounded-md dark:bg-[#121A16] dark:text-white bg-gray-200 text-gray-700 px-3 py-2.5"
-                name="priority"
-                id="priority"
-                value={task.priority}
+              <label htmlFor="description">Description</label>
+              <textarea
+                className="block min-h-[120px] w-full rounded-md dark:bg-[#121A16] dark:text-white text-gray-700 px-3 py-2.5 lg:min-h-[180px] bg-gray-200"
+                type="text"
+                name="description"
+                id="description"
+                value={task.description}
                 onChange={handleChange}
-              >
-                <option value="">Select Priority</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-              {errors.priority && (
-                <p className="text-red-500">{errors.priority}</p>
+              ></textarea>
+              {errors.description && (
+                <p className="text-red-500">{errors.description}</p>
               )}
             </div>
-          </div>
-        </div>
 
-        <div className="mt-16 flex justify-between lg:mt-20">
-          <button
-            type="button"
-            className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
-            onClick={onCloseClick}
-          >
-            Close
-          </button>
-          <button
-            type="submit"
-            className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 lg:gap-x-10 xl:gap-x-20 space-y-6 md:space-y-0">
+              <div className="space-y-2 lg:space-y-3">
+                <label htmlFor="tags">Tags</label>
+                <input
+                  className="block w-full rounded-md dark:bg-[#121A16] dark:text-white text-gray-700 bg-gray-200 px-3 py-2.5"
+                  type="text"
+                  name="tags"
+                  id="tags"
+                  value={task.tags.join(",")}
+                  onChange={handleChange}
+                />
+                {errors.tags && <p className="text-red-500">{errors.tags}</p>}
+              </div>
+
+              <div className="space-y-2 lg:space-y-3">
+                <label htmlFor="priority">Priority</label>
+                <select
+                  className="block w-full cursor-pointer rounded-md dark:bg-[#121A16] dark:text-white bg-gray-200 text-gray-700 px-3 py-2.5"
+                  name="priority"
+                  id="priority"
+                  value={task.priority}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Priority</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+                {errors.priority && (
+                  <p className="text-red-500">{errors.priority}</p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Buttons */}
+          <div className="mt-6 flex justify-between">
+            <button
+              type="button"
+              className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
+              onClick={onCloseClick}
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

@@ -8,26 +8,36 @@ export default function Header({
   theme,
 }) {
   return (
-    <nav className="py-4 fixed top-0 w-full z-50 dark:bg-[#262B28] bg-gray-300 shadow-md transition-colors duration-500">
-      <div className="container mx-auto flex items-center justify-between">
+    <nav className="py-4 fixed top-0 w-full z-50 bg-gray-300 dark:bg-[#262B28] shadow-md transition-colors duration-500">
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Logo */}
         <a href="/">
-          <img className="h-[55px]" src={logo} alt="ASSDI" />
+          <img
+            className="h-[40px] sm:h-[50px] md:h-[55px]"
+            src={logo}
+            alt="ASSDI"
+          />
         </a>
+
+        {/* Search and Toggle Area */}
         <div className="flex items-center justify-between space-x-4">
-          <div className="p-2">
+          {/* Search Bar - Hidden on small screens, visible on medium and up */}
+          <div className="hidden md:block">
             <SearchTask searchTerm={searchTerm} handleSearch={handleSearch} />
           </div>
 
-          {/* Toggle Button with Smooth Animation */}
+          {/* Theme Toggle Button */}
           <label
             onClick={toggleTheme}
             className="cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110"
           >
-            <div className="relative w-9 h-9">
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9">
               {/* Sun Icon (Light Mode) */}
               <svg
                 className={`absolute transition-all duration-500 ease-in-out fill-current text-yellow-500 transform ${
-                  theme === "dark" ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-180 scale-0"
+                  theme === "dark"
+                    ? "opacity-100 rotate-0 scale-100"
+                    : "opacity-0 -rotate-180 scale-0"
                 }`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -38,7 +48,9 @@ export default function Header({
               {/* Moon Icon (Dark Mode) */}
               <svg
                 className={`absolute transition-all duration-500 ease-in-out fill-current text-[#15803D] transform ${
-                  theme === "light" ? "opacity-100 rotate-0 scale-100" : "opacity-0 rotate-180 scale-0"
+                  theme === "light"
+                    ? "opacity-100 rotate-0 scale-100"
+                    : "opacity-0 rotate-180 scale-0"
                 }`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -48,6 +60,11 @@ export default function Header({
             </div>
           </label>
         </div>
+      </div>
+
+      {/* Search Task Bar for Mobile - Stacked below logo */}
+      <div className="block md:hidden px-4 py-2">
+        <SearchTask searchTerm={searchTerm} handleSearch={handleSearch} />
       </div>
     </nav>
   );
