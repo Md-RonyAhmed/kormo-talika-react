@@ -1,4 +1,4 @@
-import logo from "../../../assets/images/assdi-logo.png";
+import logo from "../../assets/images/assdi-logo.png";
 import SearchTask from "../task/SearchTask";
 export default function Header() {
   return (
