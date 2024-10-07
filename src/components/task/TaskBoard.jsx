@@ -1,8 +1,7 @@
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
-import NoTasksFound from "./NoTasksFound";
 
-export default function TaskBoard({ tasks }) {
+export default function TaskBoard() {
   return (
     <section className="mt-16 md:mt-20" id="tasks">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,9 +18,8 @@ export default function TaskBoard({ tasks }) {
                    px-4 py-6 sm:px-6 md:px-8 lg:px-10 xl:px-12 
                    md:py-10 lg:py-12"
         >
-          {tasks.length > 0 ? <TaskList tasks={tasks} /> : <NoTasksFound />}
-
-          <TaskActions dataLength={tasks.length <= 0} />
+          <TaskList />
+          <TaskActions />
         </div>
       </div>
     </section>

@@ -27,9 +27,7 @@ const TaskModal = () => {
   return (
     <>
       {/* Modal */}
-      <div
-        className="fixed inset-0 w-full min-h-screen bg-black bg-opacity-85 z-[100] flex items-center justify-center"
-      >
+      <div className="fixed inset-0 w-full min-h-screen bg-black bg-opacity-85 z-[100] flex items-center justify-center">
         <form
           className="z-50 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-gray-700 dark:bg-[#262B28] border border-gray-200 dark:border-gray-600 rounded-lg p-8 space-y-6 overflow-auto max-h-full" // Prevent closing modal when clicking inside
         >
@@ -49,7 +47,6 @@ const TaskModal = () => {
                 value={task.title}
                 onChange={handleChange}
               />
-             
             </div>
 
             <div className="space-y-2 lg:space-y-3">
@@ -62,7 +59,6 @@ const TaskModal = () => {
                 value={task.description}
                 onChange={handleChange}
               ></textarea>
-              
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 lg:gap-x-10 xl:gap-x-20 space-y-6 md:space-y-0">
@@ -92,7 +88,6 @@ const TaskModal = () => {
                   <option value="Medium">Medium</option>
                   <option value="High">High</option>
                 </select>
-                
               </div>
             </div>
           </div>
@@ -102,7 +97,6 @@ const TaskModal = () => {
             <button
               type="button"
               className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
-              
             >
               Close
             </button>
