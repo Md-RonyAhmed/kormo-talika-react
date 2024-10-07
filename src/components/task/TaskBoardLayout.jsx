@@ -4,7 +4,6 @@ import Footer from "../shared/Footer";
 import { useState } from "react";
 
 export default function TaskBoardLayout() {
-
   const defaultTask = {
     id: crypto.randomUUID(),
     title: "Complete React Project",
@@ -12,16 +11,15 @@ export default function TaskBoardLayout() {
     tags: ["React", "Project", "Deadline"],
     priority: "High",
     isFavorite: false,
-  }
+  };
 
-  const [tasks, setTasks] = useState([defaultTask])
-
+  const [tasks, setTasks] = useState([defaultTask]);
 
   return (
     <>
       <Header />
       <div className="flex-grow flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 py-6 md:py-8 lg:py-10">
-        <TaskBoard tasks={tasks} setTasks={setTasks}/>
+        <TaskBoard tasks={tasks} setTasks={setTasks} />
       </div>
       <Footer />
     </>

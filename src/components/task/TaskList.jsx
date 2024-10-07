@@ -28,7 +28,10 @@ export default function TaskList({ tasks }) {
         <tbody className="dark:text-white text-black even dark:[&>*:nth-child(even)]:bg-gray-800 [&>*:nth-child(even)]:bg-gray-200 ">
           {tasks.length > 0 ? (
             tasks.map((task) => (
-              <tr key={task.id} className="[&>td]:align-baseline [&>td]:px-4 [&>td]:py-6">
+              <tr
+                key={task.id}
+                className="[&>td]:align-baseline [&>td]:px-4 [&>td]:py-6"
+              >
                 <td>
                   <button>
                     <FaStar color="gray" />

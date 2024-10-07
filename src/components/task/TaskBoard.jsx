@@ -32,11 +32,13 @@ export default function TaskBoard({ tasks, setTasks }) {
                    md:py-10 lg:py-12"
           >
             <TaskList tasks={tasks} />
-            <TaskActions onAddClick={()=>setShowModal(true)}/>
+            <TaskActions onAddClick={() => setShowModal(true)} />
           </div>
         </div>
       </section>
-      {showModal && <TaskModal onSave={handleAddTask} handleCloseModal={handleCloseModal} />}
+      {showModal && (
+        <TaskModal onSave={handleAddTask} handleCloseModal={handleCloseModal} />
+      )}
     </>
   );
 }

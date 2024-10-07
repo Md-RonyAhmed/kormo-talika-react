@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TaskModal = ({onSave,handleCloseModal}) => {
+const TaskModal = ({ onSave, handleCloseModal }) => {
   const [task, setTask] = useState({
     id: crypto.randomUUID(),
     title: "",
@@ -26,7 +26,7 @@ const TaskModal = ({onSave,handleCloseModal}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(task)
+    onSave(task);
     handleCloseModal();
   };
 
@@ -39,7 +39,7 @@ const TaskModal = ({onSave,handleCloseModal}) => {
           onSubmit={handleSubmit}
         >
           <h2 className="text-center text-2xl font-bold text-white">
-            "আপনার কর্ম তালিকা তৈরি করুন"
+            আপনার কর্ম তালিকা তৈরি করুন
           </h2>
 
           {/* Form Fields */}

@@ -1,10 +1,7 @@
-import TaskBoardLayout from "../components/task/TaskBoardLayout"
-
+import TaskBoardLayout from "../components/task/TaskBoardLayout";
 
 const App = () => {
-  return (
-    <TaskBoardLayout/>
-  )
-}
+  return <TaskBoardLayout />;
+};
 
-export default App
+export default App;
