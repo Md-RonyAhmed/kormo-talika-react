@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TaskModal = () => {
+const TaskModal = ({onSave,handleCloseModal}) => {
   const [task, setTask] = useState({
     id: crypto.randomUUID(),
     title: "",
@@ -14,7 +14,7 @@ const TaskModal = () => {
     const name = e.target.name;
     let value = e.target.value;
 
-    if (value === "tags") {
+    if (name === "tags") {
       value = value.split(",");
     }
 
@@ -24,12 +24,19 @@ const TaskModal = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(task)
+    handleCloseModal();
+  };
+
   return (
     <>
       {/* Modal */}
       <div className="fixed inset-0 w-full min-h-screen bg-black bg-opacity-85 z-[100] flex items-center justify-center">
         <form
-          className="z-50 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-gray-700 dark:bg-[#262B28] border border-gray-200 dark:border-gray-600 rounded-lg p-8 space-y-6 overflow-auto max-h-full" // Prevent closing modal when clicking inside
+          className="z-50 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl bg-gray-700 dark:bg-[#262B28] border border-gray-200 dark:border-gray-600 rounded-lg p-8 space-y-6 overflow-auto max-h-full"
+          onSubmit={handleSubmit}
         >
           <h2 className="text-center text-2xl font-bold text-white">
             "আপনার কর্ম তালিকা তৈরি করুন"
@@ -97,6 +104,7 @@ const TaskModal = () => {
             <button
               type="button"
               className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
+              onClick={handleCloseModal}
             >
               Close
             </button>
