@@ -2,6 +2,7 @@ import { useState } from "react";
 import TaskActions from "./TaskActions";
 import TaskList from "./TaskList";
 import TaskModal from "./TaskModal";
+import NoTasksFound from "./NoTasksFound";
 
 export default function TaskBoard({ tasks, setTasks }) {
   const [showModal, setShowModal] = useState(false);
@@ -12,6 +13,15 @@ export default function TaskBoard({ tasks, setTasks }) {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleDeleteAllTask = () => {
+    setTasks([]);
+  }
+
+  const handleDeleteTask = (taskId) => {
+    const tasksAfterDelete = tasks.filter((task) => task.id !== taskId);
+    setTasks(tasksAfterDelete);
   };
 
   return (
@@ -31,8 +41,16 @@ export default function TaskBoard({ tasks, setTasks }) {
                    px-4 py-6 sm:px-6 md:px-8 lg:px-10 xl:px-12 
                    md:py-10 lg:py-12"
           >
-            <TaskList tasks={tasks} />
-            <TaskActions setShowModal={setShowModal} />
+            {tasks.length > 0 ? (
+              <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
+            ) : (
+              <NoTasksFound />
+            )}
+            <TaskActions
+              setShowModal={setShowModal}
+              dataLength={tasks.length > 0}
+              handleDeleteAllTask={handleDeleteAllTask}
+            />
           </div>
         </div>
       </section>

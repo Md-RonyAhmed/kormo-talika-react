@@ -1,4 +1,4 @@
-export default function TaskActions({ setShowModal }) {
+export default function TaskActions({ setShowModal, dataLength,handleDeleteAllTask }) {
   return (
     <div className="mt-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-4 sm:space-y-0">
@@ -11,9 +11,11 @@ export default function TaskActions({ setShowModal }) {
         </button>
 
         {/* Delete All Button */}
-        <button className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6 bg-red-500 hover:bg-opacity-75 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white">
-          Delete All
-        </button>
+        {dataLength && (
+          <button className="w-full sm:w-1/3 md:w-1/4 lg:w-1/6 bg-red-500 hover:bg-opacity-75 rounded-md px-3.5 py-2.5 text-sm font-semibold text-white" onClick={handleDeleteAllTask}>
+            Delete All
+          </button>
+        )}
       </div>
     </div>
   );

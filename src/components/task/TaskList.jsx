@@ -1,6 +1,6 @@
 import { FaStar } from "react-icons/fa";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, handleDeleteTask }) {
   return (
     <div className="h-[490px] overflow-auto">
       {/* Table for larger screens */}
@@ -52,10 +52,23 @@ export default function TaskList({ tasks }) {
                     ))}
                   </ul>
                 </td>
-                <td className="text-center text-blue-500">{task.priority}</td>
+                <td
+                  className={`text-center ${
+                    task.priority === "High"
+                      ? "text-red-500"
+                      : task.priority === "Medium"
+                      ? "text-green-500"
+                      : "text-blue-500"
+                  }`}
+                >
+                  {task.priority}
+                </td>
                 <td>
                   <div className="flex items-center justify-center space-x-3">
-                    <button className="bg-red-500 text-white px-3 py-1 rounded-md">
+                    <button
+                      className="bg-red-500 text-white px-3 py-1 rounded-md"
+                      onClick={() => handleDeleteTask(task.id)}
+                    >
                       Delete
                     </button>
                     <button className="bg-blue-500 text-white px-3 py-1 rounded-md">
