@@ -4,11 +4,11 @@ import TaskList from "./TaskList";
 import TaskModal from "./TaskModal";
 import NoTasksFound from "./NoTasksFound";
 
-export default function TaskBoard({ tasks, setTasks }) {
+export default function TaskBoard({ allTasks, setTasks, tasks, searchTerm }) {
   const [showModal, setShowModal] = useState(false);
 
   const handleAddTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+    setTasks([...allTasks, newTask]);
   };
 
   const handleCloseModal = () => {
@@ -17,11 +17,26 @@ export default function TaskBoard({ tasks, setTasks }) {
 
   const handleDeleteAllTask = () => {
     setTasks([]);
-  }
+  };
 
   const handleDeleteTask = (taskId) => {
-    const tasksAfterDelete = tasks.filter((task) => task.id !== taskId);
+    const tasksAfterDelete = allTasks.filter((task) => task.id !== taskId);
     setTasks(tasksAfterDelete);
+  };
+
+  const handleFavorite = (taskId) => {
+    const updatedTasks = allTasks.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          isFavorite: !task.isFavorite,
+        };
+      } else {
+        return task;
+      }
+    });
+
+    setTasks(updatedTasks);
   };
 
   return (
@@ -41,8 +56,12 @@ export default function TaskBoard({ tasks, setTasks }) {
                    px-4 py-6 sm:px-6 md:px-8 lg:px-10 xl:px-12 
                    md:py-10 lg:py-12"
           >
-            {tasks.length > 0 ? (
-              <TaskList tasks={tasks} handleDeleteTask={handleDeleteTask} />
+            {tasks.length > 0 || searchTerm ? (
+              <TaskList
+                tasks={tasks}
+                handleDeleteTask={handleDeleteTask}
+                handleFavorite={handleFavorite}
+              />
             ) : (
               <NoTasksFound />
             )}
