@@ -1,14 +1,18 @@
 import { useState } from "react";
 
-const TaskModal = ({ onSave, handleCloseModal }) => {
-  const [task, setTask] = useState({
-    id: crypto.randomUUID(),
-    title: "",
-    description: "",
-    tags: [],
-    priority: "",
-    isFavorite: false,
-  });
+const TaskModal = ({ onSave, handleCloseModal, isTaskUpdate }) => {
+  const [task, setTask] = useState(
+    isTaskUpdate || {
+      id: crypto.randomUUID(),
+      title: "",
+      description: "",
+      tags: [],
+      priority: "",
+      isFavorite: false,
+    }
+  );
+
+  const isAddTask = isTaskUpdate ? false : true;
 
   // Validation error state
   const [errors, setErrors] = useState({});
@@ -34,8 +38,7 @@ const TaskModal = ({ onSave, handleCloseModal }) => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      onSave(task);
-      handleCloseModal();
+      onSave(task, isAddTask);
     }
   };
 
@@ -71,7 +74,9 @@ const TaskModal = ({ onSave, handleCloseModal }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <h2 className="text-center text-2xl font-bold text-white">
-            আপনার কর্ম তালিকা তৈরি করুন
+          {isAddTask
+              ? "আপনার কর্ম তালিকা তৈরি করুন"
+              : "আপনার কর্ম তালিকা সংশোধন করুন"}
           </h2>
 
           {/* Form Fields */}
@@ -99,7 +104,7 @@ const TaskModal = ({ onSave, handleCloseModal }) => {
                 value={task.description}
                 onChange={handleChange}
               ></textarea>
-               {errors.description && (
+              {errors.description && (
                 <p className="text-red-500">{errors.description}</p>
               )}
             </div>
@@ -115,7 +120,7 @@ const TaskModal = ({ onSave, handleCloseModal }) => {
                   value={task.tags.join(",")}
                   onChange={handleChange}
                 />
-                 {errors.tags && <p className="text-red-500">{errors.tags}</p>}
+                {errors.tags && <p className="text-red-500">{errors.tags}</p>}
               </div>
 
               <div className="space-y-2 lg:space-y-3">

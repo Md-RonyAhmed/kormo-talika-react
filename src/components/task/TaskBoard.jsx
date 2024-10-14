@@ -6,13 +6,22 @@ import NoTasksFound from "./NoTasksFound";
 
 export default function TaskBoard({ allTasks, setTasks, tasks, searchTerm }) {
   const [showModal, setShowModal] = useState(false);
+  const [isTaskUpdate, setIsTaskUpdate] = useState(null);
 
-  const handleAddTask = (newTask) => {
-    setTasks([...allTasks, newTask]);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleAddEditTask = (newTask, isAddTask) => {
+    if (isAddTask) {
+      setTasks([...allTasks, newTask]);
+    } else {
+      setTasks(
+        allTasks.map((task) => {
+          if (task.id === newTask.id) {
+            return newTask;
+          }
+          return task;
+        })
+      );
+    }
+    handleCloseModal();
   };
 
   const handleDeleteAllTask = () => {
@@ -35,8 +44,17 @@ export default function TaskBoard({ allTasks, setTasks, tasks, searchTerm }) {
         return task;
       }
     });
-
     setTasks(updatedTasks);
+  };
+
+  const handleEditTask = (task) => {
+    setIsTaskUpdate(task);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setIsTaskUpdate(null);
   };
 
   return (
@@ -61,6 +79,7 @@ export default function TaskBoard({ allTasks, setTasks, tasks, searchTerm }) {
                 tasks={tasks}
                 handleDeleteTask={handleDeleteTask}
                 handleFavorite={handleFavorite}
+                handleEditTask={handleEditTask}
               />
             ) : (
               <NoTasksFound />
@@ -74,7 +93,11 @@ export default function TaskBoard({ allTasks, setTasks, tasks, searchTerm }) {
         </div>
       </section>
       {showModal && (
-        <TaskModal onSave={handleAddTask} handleCloseModal={handleCloseModal} />
+        <TaskModal
+          onSave={handleAddEditTask}
+          handleCloseModal={handleCloseModal}
+          isTaskUpdate={isTaskUpdate}
+        />
       )}
     </>
   );

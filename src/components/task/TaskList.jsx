@@ -1,6 +1,11 @@
 import { FaStar } from "react-icons/fa";
 
-export default function TaskList({ tasks, handleDeleteTask, handleFavorite }) {
+export default function TaskList({
+  tasks,
+  handleDeleteTask,
+  handleFavorite,
+  handleEditTask,
+}) {
   return (
     <div className="h-[490px] overflow-auto">
       {/* Table for larger screens */}
@@ -75,7 +80,10 @@ export default function TaskList({ tasks, handleDeleteTask, handleFavorite }) {
                     >
                       Delete
                     </button>
-                    <button className="bg-blue-500 text-white px-3 py-1 rounded-md">
+                    <button
+                      className="bg-blue-500 text-white px-3 py-1 rounded-md"
+                      onClick={() => handleEditTask(task)}
+                    >
                       Edit
                     </button>
                   </div>
